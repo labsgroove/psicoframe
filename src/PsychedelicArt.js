@@ -14,12 +14,6 @@ const render = (time) => {
   requestAnimationFrame(render);
 };
 render(0);
-const resizeCanvas = () => {
-  const scale = 0.7; // 70% da resolução real
-  canvas.width = window.innerWidth * scale;
-  canvas.height = window.innerHeight * scale;
-  gl.viewport(0, 0, canvas.width, canvas.height);
-};
 
 const PsychedelicArt = () => {
   const canvasRef = useRef(null);
