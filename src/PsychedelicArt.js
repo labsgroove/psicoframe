@@ -1,17 +1,25 @@
 import { useEffect, useRef } from "react";
-useEffect(() => {
-  const blockBack = () => {
-    window.history.pushState(null, '', window.location.href);
-  };
+let lastTime = 0;
+const fps = 30; // Limita a 30 FPS
+const interval = 1000 / fps;
 
-  window.history.pushState(null, '', window.location.href);
-  window.addEventListener('popstate', blockBack);
-
-  return () => {
-    window.removeEventListener('popstate', blockBack);
-  };
-}, []);
-
+const render = (time) => {
+  if (time - lastTime > interval) {
+    lastTime = time;
+    gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+    gl.uniform1f(timeLocation, time * 0.001);
+    gl.uniform2f(offsetLocation, offsetRef.current.x * 0.1, offsetRef.current.y * 0.1);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
+  requestAnimationFrame(render);
+};
+render(0);
+const resizeCanvas = () => {
+  const scale = 0.7; // 70% da resolução real
+  canvas.width = window.innerWidth * scale;
+  canvas.height = window.innerHeight * scale;
+  gl.viewport(0, 0, canvas.width, canvas.height);
+};
 
 const PsychedelicArt = () => {
   const canvasRef = useRef(null);
