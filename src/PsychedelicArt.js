@@ -71,7 +71,7 @@ const MinimalBackground = () => {
         className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none"
       />
       <img
-        src="https://i.ibb.co/wrgXPg34/friend.png"
+        src="https://i.ibb.co/LhkvxvDh/friend.png"
         alt="Friend"
         style={{
           position: "fixed",
