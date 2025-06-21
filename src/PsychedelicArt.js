@@ -132,7 +132,7 @@ const PsychedelicArt = () => {
       />
       {/* Imagem sobreposta */}
       <img
-        src="https://i.ibb.co/jPSYgp4d/friend.png"
+        src="https://i.ibb.co/wrgXPg34/friend.png"
         alt="Friend"
         style={{
           position: "fixed",
