@@ -3,18 +3,6 @@ let lastTime = 0;
 const fps = 30; // Limita a 30 FPS
 const interval = 1000 / fps;
 
-const render = (time) => {
-  if (time - lastTime > interval) {
-    lastTime = time;
-    gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-    gl.uniform1f(timeLocation, time * 0.001);
-    gl.uniform2f(offsetLocation, offsetRef.current.x * 0.1, offsetRef.current.y * 0.1);
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-  }
-  requestAnimationFrame(render);
-};
-render(0);
-
 const PsychedelicArt = () => {
   const canvasRef = useRef(null);
   const offsetRef = useRef({ x: 0, y: 0 });
