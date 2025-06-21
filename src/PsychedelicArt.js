@@ -1,8 +1,3 @@
-import { useEffect, useRef } from "react";
-let lastTime = 0;
-const fps = 30; // Limita a 30 FPS
-const interval = 1000 / fps;
-
 const PsychedelicArt = () => {
   const canvasRef = useRef(null);
   const offsetRef = useRef({ x: 0, y: 0 });
