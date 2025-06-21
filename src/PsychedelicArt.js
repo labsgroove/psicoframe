@@ -19,6 +19,14 @@ const MinimalBackground = () => {
     let hue = 0;
     let offset = 0;
 
+    // Função pra pular o verde
+    const skipGreen = (h) => {
+      if (h >= 80 && h <= 160) {
+        return (160 + (h - 80)) % 360; // pula pro pós-verde
+      }
+      return h % 360;
+    };
+
     const render = () => {
       hue = (hue + 0.5) % 360;
       offset += 0.01;
@@ -35,9 +43,14 @@ const MinimalBackground = () => {
         centerY,
         radius
       );
-      gradient.addColorStop(0, `hsl(${hue}, 100%, 50%)`);
-      gradient.addColorStop(0.5, `hsl(${(hue + 90) % 360}, 100%, 50%)`);
-      gradient.addColorStop(1, `hsl(${(hue + 180) % 360}, 100%, 10%)`);
+
+      const hue1 = skipGreen(hue);
+      const hue2 = skipGreen(hue + 90);
+      const hue3 = skipGreen(hue + 180);
+
+      gradient.addColorStop(0, `hsl(${hue1}, 100%, 50%)`);
+      gradient.addColorStop(0.5, `hsl(${hue2}, 100%, 50%)`);
+      gradient.addColorStop(1, `hsl(${hue3}, 100%, 10%)`);
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
