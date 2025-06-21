@@ -17,13 +17,27 @@ const MinimalBackground = () => {
     resizeCanvas();
 
     let hue = 0;
+    let offset = 0;
 
     const render = () => {
-      hue = (hue + 0.2) % 360;
+      hue = (hue + 0.5) % 360;
+      offset += 0.01;
 
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, `hsl(${hue}, 60%, 10%)`);
-      gradient.addColorStop(1, `hsl(${(hue + 60) % 360}, 60%, 10%)`);
+      const centerX = canvas.width / 2 + Math.sin(offset) * canvas.width * 0.1;
+      const centerY = canvas.height / 2 + Math.cos(offset) * canvas.height * 0.1;
+      const radius = Math.max(canvas.width, canvas.height) * 0.7;
+
+      const gradient = ctx.createRadialGradient(
+        centerX,
+        centerY,
+        0,
+        centerX,
+        centerY,
+        radius
+      );
+      gradient.addColorStop(0, `hsl(${hue}, 100%, 50%)`);
+      gradient.addColorStop(0.5, `hsl(${(hue + 90) % 360}, 100%, 50%)`);
+      gradient.addColorStop(1, `hsl(${(hue + 180) % 360}, 100%, 10%)`);
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
