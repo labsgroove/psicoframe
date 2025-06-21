@@ -1,4 +1,17 @@
 import { useEffect, useRef } from "react";
+useEffect(() => {
+  const blockBack = () => {
+    window.history.pushState(null, '', window.location.href);
+  };
+
+  window.history.pushState(null, '', window.location.href);
+  window.addEventListener('popstate', blockBack);
+
+  return () => {
+    window.removeEventListener('popstate', blockBack);
+  };
+}, []);
+
 
 const PsychedelicArt = () => {
   const canvasRef = useRef(null);
